@@ -134,7 +134,7 @@ import socket
 CS_DEPLOYMENT_HOSTNAME = 'cs-webapps.bu.edu'
 
 if socket.gethostname() == CS_DEPLOYMENT_HOSTNAME:
-    #STATIC_URL = '/rshah10/static/'
+    STATIC_URL = '/rshah10/static/'
     MEDIA_URL = '/rshah10/media/'
 
 # Default primary key field type
