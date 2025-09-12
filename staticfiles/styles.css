@@ -1,0 +1,56 @@
+body {
+    font-family: system-ui;
+    margin: 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 40px;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.page-section {
+    background: rgb(153, 132, 132);
+    width: 90%;
+    max-width: 800px;
+    margin-top: 30px;
+    padding: 20px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    margin: 10px 0;
+}
+
+img {
+    max-width: 50%;
+    border: 1px solid white;
+}

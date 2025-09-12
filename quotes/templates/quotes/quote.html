@@ -1,0 +1,13 @@
+<!-- 
+ File: views.py
+ Author: Rahil Shah (rshah10@bu.edu),9/12/25
+ Description: HTML file for quote page -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-section">
+    <h1> {{quote}} </h1>
+    <img src="{{image}}" alt="Random Image" style="width:300px;height:300px;">
+</div>
+{% endblock %}

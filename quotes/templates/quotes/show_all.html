@@ -1,0 +1,24 @@
+<!-- 
+ File: views.py
+ Author: Rahil Shah (rshah10@bu.edu), 9/12/25
+ Description: HTML file for all quotes and images page -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-section">
+    <h1>All quotes by Albert Einstein</h1>
+    <ul>
+        {% for quote in quotes %}
+            <li>{{ quote }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>All images of Albert Einstein</h1>
+    <ul>
+        {% for img in images %}
+            <li><img src="{{ img }}" alt="Image of Albert Einstein"></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

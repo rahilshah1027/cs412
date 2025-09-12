@@ -1,0 +1,26 @@
+<!-- 
+ File: views.py
+ Author: Rahil Shah (rshah10@bu.edu),9/12/25
+ Description: HTML file for base page -->
+
+{% load static %}
+<html>
+    <head>
+        <title>Albert Einstein Quotes</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Albert Einstein Quote of the Day</h1>
+            <nav>
+                <a href="{% url 'quote' %}">Quote</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'show_all' %}">Show All</a>
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>
