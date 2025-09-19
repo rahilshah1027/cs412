@@ -1,0 +1,40 @@
+<!-- 
+ File: order.html
+ Author: Rahil Shah (rshah10@bu.edu), 9/15/25
+ Description: HTML file for ordering form -->
+
+{% extends "restaurant/base.html" %}
+
+{% block content %}
+<div class="page-section">
+    <h1>Order</h1>
+    <form action="{% url 'confirmation' %}" method="POST">
+        {% csrf_token %}
+        <h3> Select your items </h3>
+        <p><label><input type="checkbox" name="items" value="Plain Pizza"> Plain Pizza $12.99</label></p>
+        <li>
+            Choose your toppings (up to 3) ($1.00 each):
+            <label><input type="checkbox" name="toppings" value="cheese"> Extra Cheese</label>
+            <label><input type="checkbox" name="toppings" value="olives"> Olives</label>
+            <label><input type="checkbox" name="toppings" value="mushrooms"> Mushrooms</label>
+        </li>
+        
+        <label><input type="checkbox" name="items" value="Baked Ziti"> Baked Ziti $13.99</label>
+        <label><input type="checkbox" name="items" value="Mom's Lasanga"> Mom's Lasanga $14.99</label>
+        <label><input type="checkbox" name="items" value="Eggplant Parmesan"> Eggplant Parmesan $13.99</label>
+        
+        <h4> Today's Special </h4>
+        <label><input type="checkbox" name="special" value="{{special_item.name}}"> {{ special_item.name }} ${{ special_item.price }}</label>
+        
+        <h4> Special Instructions </h4>
+        <p><textarea name="instructions" placeholder="Add any special instructions..."></textarea></p>
+        
+        <h4> Your Contact Information </h4>
+        <label>Name: <input type="text" name="name" placeholder=""></label>
+        <label>Number: <input type="text" name="number" placeholder=""></label>
+        <label>Email: <input type="text" name="email" placeholder=""></label>
+
+        <button type="submit">Place Order</button>
+    </form>
+</div>
+{% endblock %}

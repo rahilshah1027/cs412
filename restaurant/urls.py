@@ -1,5 +1,5 @@
 # File: urls.py
-# Author: Rahil Shah (rshah10@bu.edu),9/12/25
+# Author: Rahil Shah (rshah10@bu.edu), 9/14/25
 # Description: Python file for all the urls of the app
 
 from django.contrib import admin
@@ -11,7 +11,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', views.home, name='home'),
-    path(r'quote/', views.quote, name='quote'),
-    path(r'show_all/', views.show_all, name='show_all'),
-    path(r'about/', views.about, name='about'),
+    path(r'main/', views.main, name='main'),
+    path(r'order/', views.order, name='order'),
+    path(r'confirmation/', views.confirmation, name='confirmation'),
 ]

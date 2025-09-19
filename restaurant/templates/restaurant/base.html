@@ -1,0 +1,25 @@
+<!-- 
+ File: base.html
+ Author: Rahil Shah (rshah10@bu.edu), 9/15/25
+ Description: HTML file for base page -->
+
+{% load static %}
+<html>
+    <head>
+        <title>Italian Restaurant </title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Rahil's Italian Restaurant</h1>
+            <nav>
+                <a href="{% url 'main' %}">Main Page</a>
+                <a href="{% url 'order' %}">Order</a>
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>

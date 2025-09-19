@@ -1,0 +1,23 @@
+<!-- 
+ File: main.html
+ Author: Rahil Shah (rshah10@bu.edu), 9/15/25
+ Description: HTML file for main page -->
+
+{% extends "restaurant/base.html" %}
+
+{% block content %}
+<div class="page-section">
+    <h1><strong>Welcome to Rahil's Italian Restaurant!</strong></h1>
+    <ul>
+        <li> <strong>Name:</strong> Rahil's Italian Restaurant </li>
+        <li> <strong>Address:</strong>  123 Main St, Boston, MA 02215 </li>
+        <li> <strong>Hours of Operation:</strong>  
+            <ol>
+                <li> Monday - Friday: 11am - 10pm </li>
+                <li> Saturday - Sunday: 12pm - 9pm </li>
+            </ol>
+        </li>
+    </ul>
+</div>
+<img src="https://i0.wp.com/www.touristitaly.com/wp-content/uploads/2023/11/piedmont-old-town-restaurant.jpg?resize=1024%2C636&ssl=1" alt="Restaurant Image">
+{% endblock %}

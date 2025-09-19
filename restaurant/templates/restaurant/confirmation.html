@@ -1,0 +1,30 @@
+<!-- 
+ File: confirmation.html
+ Author: Rahil Shah (rshah10@bu.edu), 9/16/25
+ Description: HTML file for main page -->
+
+{% extends "restaurant/base.html" %}
+
+{% block content %}
+<div class="page-section">
+    <h1>Order Received!</h1>
+    <p><strong>Items:</strong></p>
+    <ul>
+        {% for item in items %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    <p><strong>Toppings:</strong></p>
+    <ul>
+        {% for topping in toppings %}
+            <li>{{ topping }}</li>
+        {% endfor %}
+    </ul>
+    <p><strong>Instructions:</strong> {{special_instructions}}</p>
+    <p><strong>Name:</strong> {{name}}</p>
+    <p><strong>Number:</strong> {{number}}</p>
+    <p><strong>Email:</strong> {{email}}</p>
+    <p><strong>Total Price:</strong> ${{total}}</p>
+    <p><strong>Estimated Ready Time:</strong> {{ready_time}} </p>
+</div>
+{% endblock %}

@@ -25,6 +25,14 @@ nav {
     margin-top: 10px;
 }
 
+img {
+    margin: 5px;
+    width: 400px;
+    height: 400px;
+    align-items: center;
+    border: 2px solid purple;
+}
+
 nav a {
     color: white;
     margin: 0 15px;
@@ -33,24 +41,36 @@ nav a {
 }
 
 .page-section {
-    background: rgb(153, 132, 132);
     width: 90%;
     max-width: 800px;
     margin-top: 30px;
     padding: 20px;
-    border: 2px solid black;
-    text-align: center;
-}
-
-ul {
-    list-style: none;
+    border: 2px solid purple;
+    text-align: left;
 }
 
 li {
-    margin: 10px 0;
+    list-style: none;
+    padding-left: 10px;
 }
 
-img {
-    max-width: 50%;
-    border: 1px solid white;
+li label {
+    display: block;
+    margin: 4px 0;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    margin: 6px 0 12px 0;
+    padding: 5px;
+    border: 1px solid #d01111;
+    background-color: white;
+    font-family: inherit;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
