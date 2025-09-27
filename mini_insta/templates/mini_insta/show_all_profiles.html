@@ -1,0 +1,24 @@
+<!-- 
+ File: show_all_profiles.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file to show all the mini insta profiles -->
+
+
+{% extends "mini_insta/base.html" %}
+
+{% block content %}
+<h1> Showing all profiles </h1>
+
+<div>
+    {% for profile in profiles %}
+    <div>
+        <h2>Username: {{profile.username}}</h2>
+        <h2>Display name: {{profile.display_name}}</h2>
+        <a href="{% url 'show_profile' profile.pk %}">
+        <img src="{{ profile.profile_image_url }}" width="150px" height="150px"> 
+        </a>
+    <hr>
+
+    {% endfor %}
+</div>
+{% endblock %}

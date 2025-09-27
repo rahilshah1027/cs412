@@ -1,0 +1,26 @@
+<!-- 
+ File: show_profile.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for indivdual profile pages  -->
+
+
+{% extends "mini_insta/base.html" %}
+
+{% block content %}
+<div>
+    <div>
+        <img src="{{ profile.profile_image_url }}">
+        <h1>Display name: {{ profile.display_name }}</h1>
+        <p>Username: {{ profile.username }}</p>
+    </div>
+
+    <div>
+        <p>{{ profile.bio_text }}</p>
+        <p>Joined: {{ profile.join_date}}</p>
+    </div>
+
+    <p><strong>Followers:</strong></p>
+    <p><strong>Following:</strong> </p>
+
+</div>
+{% endblock %}
