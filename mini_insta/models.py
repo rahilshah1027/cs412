@@ -29,3 +29,49 @@ class Profile(models.Model):
         Prefer display_name, otherwise return username.
         """
         return self.display_name or self.username
+
+    def get_all_posts(self):
+        """Return all posts made by this profile."""
+        return Post.objects.filter(profile=self).order_by('-timestamp')
+
+
+class Post(models.Model):
+    """A post made by a user.
+
+    Attributes:
+        profile
+        caption
+        timestamp
+    """
+
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    caption = models.TextField(blank=True)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """Return a readable identifier for the post."""
+        return f"Post by {self.profile} at {self.timestamp}"
+    
+    def get_all_photos(self):
+        """
+        Return all Photo objects related to this Post.
+        """
+        return Photo.objects.filter(post=self)
+
+
+class Photo(models.Model):
+    """A photo associated with a post.
+
+    Attributes:
+        post
+        image_url
+        timestamp
+    """
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image_url = models.URLField(null=True)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """Return a readable identifier for the photo."""
+        return f"Photo for post {self.post.id} at {self.image_url}"

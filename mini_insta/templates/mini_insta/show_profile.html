@@ -5,6 +5,7 @@
 
 
 {% extends "mini_insta/base.html" %}
+{% load static %}
 
 {% block content %}
 <div>
@@ -22,5 +23,20 @@
     <p><strong>Followers:</strong></p>
     <p><strong>Following:</strong> </p>
 
+    <h2>Posts</h2>
+    {% for post in profile.get_all_posts %}
+        {% with photos=post.get_all_photos %}
+            {% if photos %}
+                <img src="{{ photos.0.image_url }}" alt="Post image" style="max-width:300px;">
+            {% else %}
+                <img src="{% static 'no_image.jpeg' %}" alt="No image available" style="max-width:300px;">
+            {% endif %}
+        {% endwith %}
+        <a href="{% url 'show_post' post.pk %}"><p>{{ post.caption }}</p></a>
+        <p><em>Posted on {{ post.timestamp }}</em></p>
+        <hr>
+    {% empty %}
+        <p>No posts yet.</p>
+    {% endfor %}
 </div>
 {% endblock %}
