@@ -2,8 +2,11 @@
 
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.urls import reverse
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Profile, Post, Photo
+from .forms import CreatePostForm
+
 # Create your views here.
 
 class ProfileListView(ListView):
@@ -25,3 +28,36 @@ class PostDetailView(DetailView):
     model = Post
     template_name = "mini_insta/show_post.html"
     context_object_name = "post"
+
+class CreatePostView(CreateView):
+    """View for creating a new Post."""
+
+    form_class = CreatePostForm
+    template_name = "mini_insta/create_post_form.html"
+
+    def get_context_data(self, **kwargs):
+        """Add the profile to the context."""
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+        context['profile'] = profile
+        return context
+
+    def form_valid(self, form):
+        """Associate the new post with the correct profile."""
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+        form.instance.profile = profile
+
+        response = super().form_valid(form)
+        image_url = self.request.POST.get('image_url')
+        print("Image URL:", image_url)  # Debugging line
+        if image_url:
+            Photo.objects.create(post=form.instance, image_url=image_url)
+
+        return response
+
+    def get_success_url(self):
+        """Redirect back to the profile page after creating a post."""
+        pk = self.kwargs['pk']
+        return reverse('show_profile', kwargs={'pk': pk})

@@ -1,5 +1,6 @@
 """Models for the mini_insta app."""
 from django.db import models
+from django.urls import reverse
 
 class Profile(models.Model):
     """A public user profile.
@@ -57,6 +58,10 @@ class Post(models.Model):
         Return all Photo objects related to this Post.
         """
         return Photo.objects.filter(post=self)
+
+    def get_absolute_url(self):
+        """Return the absolute URL to view this post."""
+        return reverse("show_post", kwargs={"pk": self.pk})
 
 
 class Photo(models.Model):

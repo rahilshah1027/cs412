@@ -1,0 +1,25 @@
+<!-- 
+ File: create_post_form.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file with form to create a new post -->
+
+
+{% extends "mini_insta/base.html" %}
+
+{% block content %}
+<h1> Create a new post! </h1>
+<form action= "{% url 'create_post' profile.pk %}" method="POST">
+    {% csrf_token %}
+
+    <label for="caption">Caption:</label>
+    {{ form.caption}}
+    <label for="image_url">Photo URL:</label>
+    <input type="url" name="image_url" id="image_url">
+    <hr>
+    <button type="submit">Create Post</button>
+    <a href="{% url 'show_profile' profile.pk %}"> 
+        <button type="button">Cancel</button> 
+    </a>
+</form>
+
+{% endblock %}
