@@ -10,7 +10,14 @@
 
 <p>Are you sure you want to delete this post?</p>
 
-<form method="POSt" action="">
+<div>
+    <p>Caption: {{ post.caption }}</p>
+    {% for photo in post.get_all_photos %}
+        <img src="{{ photo.get_image_url }}" alt="Post Image" style="max-width:300px;">
+    {% endfor %}
+</div>
+
+<form method="POST" action="">
     {% csrf_token %}
     <button type="submit">Confirm Delete</button>
 </form>
