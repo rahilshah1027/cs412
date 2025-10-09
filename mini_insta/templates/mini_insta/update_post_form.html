@@ -1,0 +1,21 @@
+<!-- 
+ File: uodate_post_form.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file to display form for updating a post -->
+
+{% extends "mini_insta/base.html" %}
+
+{% block content %}
+<h1>Update Post</h1>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <label for="caption">Caption:</label>
+    {{ form.caption }}
+    <button type="submit">Confirm Update</button>
+</form>
+
+<form method="GET" action="{% url 'show_post' post.pk %}">
+    <button type="submit">Cancel</button>
+</form>
+{% endblock %}

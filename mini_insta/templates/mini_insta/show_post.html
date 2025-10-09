@@ -16,5 +16,13 @@
         {% endif %}
     {% endfor %}
     <p><em>Posted on {{ post.timestamp }}</em></p>
+
+    <a href="{% url 'update_post' post.pk %}">
+        <button type="button">Update Post </button> 
+    </a>
+    <a href="{% url 'delete_post' post.pk %}">
+        <button type="button">Delete Post </button> 
+    </a>
+
 </div>
 {% endblock %}
