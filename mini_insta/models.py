@@ -76,7 +76,19 @@ class Photo(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     image_url = models.URLField(null=True)
     timestamp = models.DateTimeField(auto_now=True)
+    image_file = models.ImageField(blank=True)
 
     def __str__(self):
         """Return a readable identifier for the photo."""
-        return f"Photo for post {self.post.id} at {self.image_url}"
+        if self.image_file:
+            return f"Photo for post {self.post.id} at: {self.image_file.url}"
+        elif self.image_url:
+            return f"Photo for post {self.post.id} at URL: {self.image_url}"
+        else:
+            return f"Photo for post {self.post.id} (no image available)"
+    
+    def get_image_url(self):
+        """Return the image URL, preferring uploaded file if available."""
+        if self.image_file:
+            return self.image_file.url
+        return self.image_url

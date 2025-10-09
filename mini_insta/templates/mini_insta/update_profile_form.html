@@ -1,0 +1,32 @@
+<!-- 
+ File: update_profile_form.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML form to update an existing profile 
+-->
+
+{% extends "mini_insta/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="display_name">Display Name:</label>
+    {{ form.display_name }}
+
+    <label for="bio_text">Bio:</label>
+    {{ form.bio_text }}
+
+    <label for="profile_image_url">Profile Image URL:</label>
+    {{ form.profile_image_url }}
+
+    <hr>
+
+    <button type="submit">Save Changes</button>
+    <a href="{% url 'show_profile' object.pk %}">
+        <button type="button">Cancel</button>
+    </a>
+</form>
+
+{% endblock %}

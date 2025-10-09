@@ -20,6 +20,10 @@
         <p>Joined: {{ profile.join_date}}</p>
     </div>
 
+    <a href="{% url 'update_profile' profile.pk %}">
+        <button type="button">Update Profile </button> 
+    </a>
+
     <p><strong>Followers:</strong></p>
     <p><strong>Following:</strong> </p>
 
@@ -27,7 +31,7 @@
     {% for post in profile.get_all_posts %}
         {% with photos=post.get_all_photos %}
             {% if photos %}
-                <img src="{{ photos.0.image_url }}" alt="Post image" style="max-width:300px;">
+                <img src="{{ photos.0.get_image_url }}" alt="Post image" style="max-width:300px;">
             {% else %}
                 <img src="{% static 'no_image.jpeg' %}" alt="No image available" style="max-width:300px;">
             {% endif %}

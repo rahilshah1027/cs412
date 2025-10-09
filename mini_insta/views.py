@@ -3,9 +3,9 @@
 
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Profile, Post, Photo
-from .forms import CreatePostForm
+from .forms import CreatePostForm, UpdateProfileForm
 
 # Create your views here.
 
@@ -50,14 +50,30 @@ class CreatePostView(CreateView):
         form.instance.profile = profile
 
         response = super().form_valid(form)
-        image_url = self.request.POST.get('image_url')
-        print("Image URL:", image_url)  # Debugging line
-        if image_url:
-            Photo.objects.create(post=form.instance, image_url=image_url)
-
+        # image_url = self.request.POST.get('image_url')
+        # print("Image URL:", image_url)  # Debugging line
+        # if image_url:
+        #     Photo.objects.create(post=form.instance, image_url=image_url)
+        files = self.request.FILES.getlist('image_files')
+        print("Uploaded files:", files)  # Debugging line
+        for file in files: # ASK IN CLASS ON THURSDAY (THUMBNAIL OF POST WONT SHOW PHOTO)
+            Photo.objects.create(post=form.instance, image_file=file)
         return response
 
     def get_success_url(self):
         """Redirect back to the profile page after creating a post."""
+        pk = self.kwargs['pk']
+        return reverse('show_profile', kwargs={'pk': pk})
+
+class UpdateProfileView(UpdateView):
+    """View for updating an existing Profile."""
+
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = "mini_insta/update_profile_form.html"
+    context_object_name = "profile"
+
+    def get_success_url(self):
+        """Redirect back to the profile page after updating."""
         pk = self.kwargs['pk']
         return reverse('show_profile', kwargs={'pk': pk})
