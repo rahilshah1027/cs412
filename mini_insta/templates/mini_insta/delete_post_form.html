@@ -22,7 +22,7 @@
     <button type="submit">Confirm Delete</button>
 </form>
 
-<form method="GET" action="{% url 'show_profile' object.pk %}">
+<form method="GET" action="{% url 'show_profile' post.profile.pk %}">
     <button type="submit">Cancel</button>
 </form>
 {% endblock %}
