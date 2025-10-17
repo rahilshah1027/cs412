@@ -1,0 +1,22 @@
+<!-- 
+ File: show_followers.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for detailed view of all profiles followers -->
+
+{% extends "mini_insta/base.html" %}
+{% load static %}
+
+{% block content %}
+<div>
+    <p>Followers of {{ profile.username }}</p>
+    <ul>
+        {% for profile in profile.get_followers %}
+            <li>
+                <a href="{% url 'show_profile' profile.pk %}">{{ profile.username }}</a>
+            </li>
+        {% empty %}
+            <li>No followers found.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

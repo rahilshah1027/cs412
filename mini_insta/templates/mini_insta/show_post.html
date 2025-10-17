@@ -10,6 +10,7 @@
 <div>
     <h1>Post</h1>
     <p>{{ post.caption }}</p>
+    <p> Likes: {{ post.get_num_likes }} </p>
     {% for photo in post.get_all_photos %}
         {% if photo.get_image_url %}
             <img src="{{ photo.get_image_url }}" alt="Post image" style="max-width:300px;">
@@ -17,9 +18,23 @@
     {% endfor %}
     <p><em>Posted on {{ post.timestamp }}</em></p>
 
+    <hr>
+    <h2>Comments</h2>
+    {% for comment in post.get_all_comments %}
+        <div>
+            <p><strong>{{ comment.profile.username }}:</strong> {{ comment.text }}</p>
+            <p>Commented at {{ comment.timestamp }}</p>
+        </div>
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
+
+    <hr>
+
     <a href="{% url 'update_post' post.pk %}">
         <button type="button">Update Post </button> 
     </a>
+    
     <a href="{% url 'delete_post' post.pk %}">
         <button type="button">Delete Post </button> 
     </a>

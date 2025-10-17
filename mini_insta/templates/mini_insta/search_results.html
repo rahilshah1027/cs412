@@ -1,0 +1,39 @@
+<!-- 
+ File: search_results.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for the search results returned -->
+
+ {% extends "mini_insta/base.html" %}
+
+{% block content %}
+<h2>Search Results for "{{ query }}"</h2>
+
+<h3>Profiles</h3>
+{% if profile_results %}
+    <ul>
+    {% for profile in profile_results %}
+        <li>
+            <a href="{% url 'show_profile' profile.pk %}"> {{ profile.username }} </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No profiles found.</p>
+{% endif %}
+
+<h3>Posts</h3>
+{% if post_results %}
+    <ul>
+    {% for post in post_results %}
+        <li>
+            <strong>{{ post.profile.username }}</strong>: {{ post.caption }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No posts found.</p>
+{% endif %}
+
+<a href="{% url 'search' profile.pk %}">New Search</a> |
+<a href="{% url 'show_profile' profile.pk %}">Back to Profile</a>
+{% endblock %}

@@ -1,0 +1,33 @@
+<!-- 
+ File: show_feed.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for the feed of posts -->
+
+{% extends "mini_insta/base.html" %}
+{% load static %}
+
+{% block content %}
+<div>
+    <h2>Post Feed</h2>
+
+    {% for post in posts %}
+        <div>
+            <p><strong>{{ post.profile.username }}</strong></p>
+
+            {% with photos=post.get_all_photos %}
+                {% if photos %}
+                    <img src="{{ photos.0.get_image_url }}" alt="Post image" style="max-width:300px;">
+                {% else %}
+                    <img src="{% static 'no_image.jpeg' %}" alt="No image available" style="max-width:300px;">
+                {% endif %}
+            {% endwith %}
+
+            <p>{{ post.caption }}</p>
+
+            <p>{{ post.get_num_likes }} likes</p>
+        </div>
+    {% empty %}
+        <p>No posts to show in your feed.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
-"""Views for the mini_insta app."""
-
+# mini_insta/views.py
+# Includes all the views for the mini_insta app.
 
 from django.shortcuts import render
 from django.urls import reverse
@@ -112,3 +112,65 @@ class UpdatePostView(UpdateView):
         """Redirect back to the post page after updating."""
         pk = self.kwargs['pk']
         return reverse('show_post', kwargs={'pk': pk})
+    
+class ShowFollowersView(DetailView):
+    """Display all followers of a given profile."""
+
+    model = Profile
+    template_name = "mini_insta/show_followers.html"
+    context_object_name = "profile"
+
+class ShowFollowingView(DetailView):
+    """Display all profiles that a given profile is following."""
+
+    model = Profile
+    template_name = "mini_insta/show_following.html"
+    context_object_name = "profile"
+
+class PostFeedListView(ListView):
+    """Display a feed of posts from profiles that the user follows."""
+
+    model = Post
+    template_name = "mini_insta/show_feed.html"
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        """Return posts from profiles that the user follows."""
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+        return profile.get_post_feed()
+
+class SearchView(ListView):
+    """View for searching profiles by username or display name."""
+
+    model = Profile
+    template_name = "mini_insta/search_results.html"
+    context_object_name = "profiles"
+
+    def dispatch(self, request, *args, **kwargs):
+        if 'query' not in self.request.GET:
+            pk = self.kwargs['pk'] 
+            profile = Profile.objects.get(pk=pk)
+            return render(request, 'mini_insta/search.html', {'profile': profile})
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_queryset(self):
+        query = self.request.GET.get('query', '')
+        return Post.objects.filter(caption__icontains=query).order_by('-timestamp')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+        query = self.request.GET.get('query', '')
+
+        if query != '':
+            post_results = self.get_queryset()
+            profile_results = Profile.objects.filter(username__icontains=query) | Profile.objects.filter(display_name__icontains=query) | Profile.objects.filter(bio_text__icontains=query)
+
+        context['profile'] = profile
+        context['query'] = query
+        context['post_results'] = post_results
+        context['profile_results'] = profile_results
+        return context

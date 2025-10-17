@@ -24,8 +24,12 @@
         <button type="button">Update Profile </button> 
     </a>
 
-    <p><strong>Followers:</strong></p>
-    <p><strong>Following:</strong> </p>
+    <p><strong>Followers:</strong> 
+        <a href="{% url 'show_followers' profile.pk %}">{{ profile.get_num_followers }}</a>
+    </p>
+    <p><strong>Following:</strong> 
+        <a href="{% url 'show_following' profile.pk %}">{{ profile.get_num_following }}</a>
+    </p>    
 
     <h2>Posts</h2>
     {% for post in profile.get_all_posts %}
