@@ -1,4 +1,10 @@
-"""Models for the mini_insta app."""
+"""
+mini_insta/models.py
+Models for the mini_insta app.
+Name: Rahil Shah
+Email: rshah10@bu.edu
+"""
+
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User

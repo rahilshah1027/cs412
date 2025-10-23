@@ -1,5 +1,8 @@
-"""URL patterns for the mini_insta app.
-
+"""
+mini_insta/urls.py
+URL patterns for the mini_insta app.
+Name: Rahil Shah
+Email: rshah10@bu.edu
 Provides routes to list all profiles and to view a single profile's detail.
 """
 

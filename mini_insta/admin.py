@@ -1,4 +1,6 @@
 # admin.py
+# Name: Rahil Shah
+# Email: rshah10@bu.edu
 # Python file for registering models with the Django admin interface.
 
 from django.contrib import admin

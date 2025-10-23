@@ -1,5 +1,9 @@
-# mini_insta/views.py
-# Includes all the views for the mini_insta app.
+"""
+mini_insta/views.py
+Name: Rahil Shah
+Email: rshah10@bu.edu
+Includes all the views for the mini_insta app.
+"""
 
 from django.shortcuts import render, redirect
 from django.urls import reverse

@@ -1,4 +1,9 @@
-"""Forms for the mini_insta app."""
+"""
+mini_insta/forms.py
+Forms for the mini_insta app.
+Name: Rahil Shah
+Email: rshah10@bu.edu
+"""
 
 from django import forms
 from .models import *
