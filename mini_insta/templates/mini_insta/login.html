@@ -1,0 +1,26 @@
+<!-- 
+ File: login.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file to display login page -->
+
+{% extends "mini_insta/base.html" %}
+{% load static %}
+
+{% block content %}
+<div>
+    <h2>Login</h2>
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        {{ form}}
+        <input type="submit" value="Login">
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+        {% else %}
+            <input type="hidden" name="next" value="{% url 'show_all_profiles' %}">
+        {% endif %}
+    </form>
+
+    <h4> Don't have an account? </h4>
+    <a href="{% url 'create_profile' %}"> Create a Profile </a>
+</div>
+{% endblock %}

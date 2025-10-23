@@ -1,0 +1,27 @@
+<!-- 
+ File: create_profile_form.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML form to create a new profile when registering a new user
+-->
+
+{% extends "mini_insta/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h2> Create Your Profile! </h2>
+<form method="POST">
+    {% csrf_token %}
+
+    <h3> Register Your Account </h3>
+    {{ user_form.as_p }}
+
+    <h3> Customize Your Profile </h3>
+    {{ form.as_p }}
+
+    <hr> 
+
+    <button type="submit">Create Profile</button>
+</form>
+
+{% endblock %}

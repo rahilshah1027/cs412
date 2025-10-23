@@ -13,12 +13,28 @@
         <header>
             <h1>Mini Insta</h1>
             <nav>
-                {% if profile %}
-                    <a href="{% url 'show_feed' profile.pk %}">Home</a>
-                    <a href="{% url 'show_profile' profile.pk %}">Profile</a>
-                    <a href="{% url 'search' profile.pk %}">Search</a>
+                {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
+                    <a href="{% url 'show_all_profiles' %}">Home</a>
+                    {% if user == profile.user %}
+                        <a href="{% url 'show_feed' %}">Feed</a>
+                        <a href="{% url 'show_profile' profile.pk %}">Profile</a>
+                        <a href="{% url 'search' %}">Search</a>
+                        <a href="{% url 'create_post' %}">Create New Post</a>
+                    {% endif %}
                 {% else %}
                     <a href="{% url 'show_all_profiles' %}">Home</a>
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'create_profile' %}">Create Profile</a>
+                {% endif %}
+                <hr>
+                {% if user.is_authenticated %}
+                    Logged in as {{ request.user }} 
+                {% else %}
+                    Not logged in
                 {% endif %}
             </nav>
         </header>
@@ -29,8 +45,5 @@
     </body>
     <footer> 
         <!--<a href="{% url 'show_all_profiles' %}">Back to All Profiles</a>!-->
-        {% if profile %}
-            <a href="{% url 'create_post' profile.pk %}">Create New Post</a>
-        {% endif %}
     </footer>
 </html>

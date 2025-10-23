@@ -20,9 +20,25 @@
         <p>Joined: {{ profile.join_date}}</p>
     </div>
 
-    <a href="{% url 'update_profile' profile.pk %}">
-        <button type="button">Update Profile </button> 
-    </a>
+
+
+    {% if user.is_authenticated %}
+        {% if user == profile.user %}
+            <a href="{% url 'update_profile' %}">
+                <button type="button">Update Profile </button> 
+            </a>
+        {% else %}
+            {% if logged_in_profile not in profile.get_followers %}
+                <a href="{% url 'follow_profile' profile.pk %}">
+                    <button type="button">Follow </button>
+                </a>
+            {% else %}
+                <a href="{% url 'delete_follow' profile.pk %}">
+                    <button type="button">Unfollow </button>
+                </a>
+            {% endif %}
+        {% endif %}
+    {% endif %}
 
     <p><strong>Followers:</strong> 
         <a href="{% url 'show_followers' profile.pk %}">{{ profile.get_num_followers }}</a>

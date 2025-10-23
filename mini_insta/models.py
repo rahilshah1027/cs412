@@ -1,6 +1,7 @@
 """Models for the mini_insta app."""
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Profile(models.Model):
     """A public user profile.
@@ -23,6 +24,9 @@ class Profile(models.Model):
     bio_text = models.TextField(blank=True)
     # Auto-updated date field (set to now on each save)
     join_date = models.DateField(auto_now=True)
+    
+    # Link to the built-in User model for authentication
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         """Return a readable identifier for the profile.
@@ -37,8 +41,8 @@ class Profile(models.Model):
     
     def get_followers(self):
         """Return all profiles that follow this profile."""
-        followers = Follow.objects.filter(follower_profile=self)
-        return [follower.profile for follower in followers]
+        followers = Follow.objects.filter(profile=self)
+        return [follow.follower_profile for follow in followers]
 
     def get_num_followers(self):
         """Return the number of followers this profile has."""
@@ -46,8 +50,8 @@ class Profile(models.Model):
     
     def get_following(self):
         """Return all profiles that this profile is following."""
-        following = Follow.objects.filter(profile=self)
-        return [follow.follower_profile for follow in following]
+        following = Follow.objects.filter(follower_profile=self)
+        return [follow.profile for follow in following]
     
     def get_num_following(self):
         """Return the number of profiles this profile is following."""
@@ -94,6 +98,10 @@ class Post(models.Model):
         """Return all likes made on this post."""
         return Like.objects.filter(post=self)
     
+    def get_liking_profiles(self):
+        """Return a list of Profile objects that liked this post."""
+        return [like.profile for like in self.get_likes()]
+
     def get_num_likes(self):
         """Return the number of likes on this post."""
         return self.get_likes().count()
@@ -180,3 +188,4 @@ class Like(models.Model):
     def __str__(self):
         """Return a readable identifier for the like."""
         return f"Liked by {self.profile} on {self.post} at {self.timestamp}"
+    

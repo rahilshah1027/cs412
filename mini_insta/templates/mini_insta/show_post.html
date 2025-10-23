@@ -30,14 +30,28 @@
     {% endfor %}
 
     <hr>
-
-    <a href="{% url 'update_post' post.pk %}">
-        <button type="button">Update Post </button> 
-    </a>
     
-    <a href="{% url 'delete_post' post.pk %}">
-        <button type="button">Delete Post </button> 
-    </a>
+    {% if user.is_authenticated %}
+        {% if user == post.profile.user %}
+            <a href="{% url 'update_post' post.pk %}">
+                <button type="button">Update Post </button> 
+            </a>
+            
+            <a href="{% url 'delete_post' post.pk %}">
+                <button type="button">Delete Post </button> 
+            </a>
+        {% else %}
+            {% if logged_in_profile not in post.get_liking_profiles %}
+                <a href="{% url 'like_post' post.pk %}">
+                    <button type="button">Like</button>
+                </a>
+            {% else %}
+                <a href="{% url 'delete_like' post.pk %}">
+                    <button type="button">Unlike</button>
+                </a>
+            {% endif %}
+        {% endif %}
+    {% endif %}
 
 </div>
 {% endblock %}
