@@ -1,0 +1,27 @@
+<!-- 
+ File: graphs.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for all the neccesary graphs -->
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+
+<h1> Voter Analytics Graphs </h1>
+
+<div> 
+    {% include 'voter_analytics/filter.html' %}
+</div>
+
+<div>
+    {{ graph_div_years|safe }}
+</div>
+
+<div>
+    {{ graph_div_party|safe }}
+</div>
+
+<div>
+    {{ graph_div_election|safe }}
+</div>
+{% endblock %}

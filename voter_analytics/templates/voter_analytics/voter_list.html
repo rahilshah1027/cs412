@@ -1,0 +1,51 @@
+<!-- 
+ File: voter_list.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for voter list view -->
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+
+    <div> 
+        {% include 'voter_analytics/filter.html' %}
+    </div>
+
+    <h2>Voter List</h2>
+    <div>
+        {% if is_paginated %}
+        <div class="pagination-buttons">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    <br>
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Street Name</th>
+            <th>Date of Birth</th>
+            <th>Party</th>
+            <th>Voter Score</th>
+        </tr>
+
+        {% for voter in voters %}
+        <tr>
+            <td><a href="{% url 'voter' voter.pk %}">{{ voter.first_name }}</a></td>
+            <td>{{ voter.last_name }}</td>
+            <td>{{ voter.address_street_name }}</td>
+            <td>{{ voter.date_of_birth }}</td>
+            <td>{{ voter.party_affiliation }}</td>
+            <td>{{ voter.voter_score }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

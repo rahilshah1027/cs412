@@ -1,0 +1,24 @@
+<!-- 
+ File: base.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for base page -->
+
+{% load static %}
+<html>
+    <head>
+        <title>Voter Analytics</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="{% url 'voters' %}">Voter List</a>
+                <a href="{% url 'graphs' %}">Graphs</a>
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>
