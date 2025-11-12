@@ -1,0 +1,14 @@
+<!-- 
+ File: joke_list.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for joke list -->
+
+{% extends "dadjokes/base.html" %}
+
+{% block content %}
+    <h1> List of all Jokes </h1>
+    {% for joke in jokes %}
+        <h3> <a href="{% url 'joke' joke.pk %}"> {{ joke.text }} </a></h3>
+        <hr>
+    {% endfor %}
+{% endblock %}

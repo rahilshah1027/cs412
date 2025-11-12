@@ -1,0 +1,14 @@
+<!-- 
+ File: picture_list.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for picture list -->
+
+{% extends "dadjokes/base.html" %}
+
+{% block content %}
+    <h1> List of all Pictures </h1>
+    {% for picture in pictures %}
+        <a href="{% url 'picture' picture.pk %}"> <img src="{{ picture.image_url }}" alt="Joke Picture" style="width:300px;height:300px;"> </a>
+        <hr>
+    {% endfor %}
+{% endblock %}

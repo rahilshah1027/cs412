@@ -1,0 +1,11 @@
+<!-- 
+ File: joke.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for detail view of joke -->
+
+{% extends "dadjokes/base.html" %}
+
+{% block content %}
+    <h3> {{ joke.text }} </h3>
+    <h4> By: {{ joke.name }} </h4>
+{% endblock %}

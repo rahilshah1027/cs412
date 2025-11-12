@@ -1,0 +1,26 @@
+<!-- 
+ File: base.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for base page -->
+
+{% load static %}
+<html>
+    <head>
+        <title>Dad Jokes</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Dad Jokes</h1>
+            <nav>
+                <a href="{% url 'random_joke' %}">Random Joke</a>
+                <a href="{% url 'joke_list' %}">Joke List</a>
+                <a href="{% url 'picture_list' %}">Picture List</a>
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>
