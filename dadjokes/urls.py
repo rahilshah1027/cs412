@@ -19,7 +19,8 @@ urlpatterns = [
 
     # API ENDPOINTS
     path('api/', RandomJokeAPIView.as_view(), name='api_root'),
-    path('api/random', RandomJokeAPIView.as_view(), name='api_random'),
+    path('api/random', RandomJokeAPIView.as_view(), name='api_random_joke'),
+    path('api/random_picture', RandomPicutureAPIView.as_view(), name='api_random_picture'),
     path('api/jokes', JokeListAPIView.as_view(), name='api_jokes'),
     path('api/joke/<int:pk>', JokeDetailAPIView.as_view(), name='api_joke_detail'),
     path('api/pictures', PictureListAPIView.as_view(), name='api_pictures'),
