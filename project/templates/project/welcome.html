@@ -1,0 +1,15 @@
+<!-- 
+ File: welcome.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for the welcome page -->
+
+{% extends "project/base.html" %}
+
+{% block content %}
+<div class="welcome-section">
+    <h1 class="welcome-title">Welcome to GameRank!</h1>
+    <p class="welcome-tag">Discover, rate, and review your favorite games.</p>
+    <a href="{% url 'game_list' %}" class="welcome-button">Get Started</a>
+</div>
+
+{% endblock %}

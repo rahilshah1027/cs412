@@ -1,0 +1,19 @@
+<!-- 
+ File: add_game_form.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for the form to add a new game -->
+
+{% extends "project/base.html" %}
+
+{% block content %}
+
+<div class="form">
+    <h1>Add a New Game</h1>
+
+    <form method="POST" enctype="multipart/form-data"> 
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">Add Game</button>
+    </form>
+</div>
+{% endblock %}

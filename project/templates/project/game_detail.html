@@ -1,0 +1,41 @@
+<!-- 
+ File: game_detail.html
+ Author: Rahil Shah (rshah10@bu.edu),
+ Description: HTML file for detailed view of a game -->
+{% extends "project/base.html" %}
+
+{% block content %}
+
+<div class="detail-title">{{game.title}}</div>
+
+<div class="detail-container">
+    {% if game.image %}
+        <img src="{{ game.image.url }}" alt="{{ game.title }}" class="detail-image">
+    {% endif %}
+
+    <div class="detail-info">
+        <p><strong>Genre:</strong> {{ game.genre.name }}</p>
+        <p><strong>Release Date:</strong> {{ game.release_date }}</p>
+
+        <h3>Description</h3>
+        <p class="detail-description">{{ game.description }}</p>
+
+    </div>
+</div>
+
+<hr>
+
+
+<h2 class="reviews-header">Reviews for {{ game.title }}</h2>
+
+<ul class="review-list">
+    {% for review in game.reviews.all %}
+        <li class="review-list-item">
+            <a href="{% url 'review_detail' review.pk %}"> <strong>{{ review.rating }}/10</strong> — {{ review.reviewer_name }} </a>
+        </li>
+    {% empty %}
+        <li>No reviews yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

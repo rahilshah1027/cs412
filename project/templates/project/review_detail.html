@@ -1,0 +1,27 @@
+<!-- 
+ File: review_detail.html
+ Author: Rahil Shah (rshah10@bu.edu),
+ Description: HTML file for detailed view of a review-->
+{% extends "project/base.html" %}
+
+{% block content %}
+
+<h1 class="review-detail-title">{{ review.game.title }} — {{ review.rating }}/10</h1>
+
+
+<div class="review-detail-card">
+    
+    <p><strong>Reviewed by:</strong> {{ review.reviewer_name }}</p>
+    <p><strong>Platform played on:</strong> {{ review.platform.name }}</p>
+
+    <h3> Review </h3>
+    <p class="review-body">{{ review.body }}</p>
+    <p class="review-date"> Posted on {{ review.created_at }} </p>
+
+    <div class="review-links">
+        <a href="{% url 'update_review' review.pk %}">Edit Review</a>
+        <a href="{% url 'delete_review' review.pk %}">Delete Review</a>
+        <a href="{% url 'game_detail' review.game.pk %}">Back to Game</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+<!-- 
+ File: game_filter.html
+ Author: Rahil Shah (rshah10@bu.edu)
+ Description: HTML file for the form to filter genre or year for games -->
+
+<div class="filter-container">
+    <form action= "" class="filter-form">
+    
+        <label>Genre: </label>
+        <select name="genre">
+            <option value="">Any</option>
+            {% for genre in genres %}
+            <option value="{{ genre }}">{{ genre }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+
+        <label> Release Year: </label>
+        <select name="year">
+            <option value="">Any</option>
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <button type="submit" class="button">Filter</button>
+
+    </form>
+</div>

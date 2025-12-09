@@ -1,0 +1,34 @@
+<!-- 
+ File: review_list.html
+ Author: Rahil Shah (rshah10@bu.edu),
+ Description: HTML file for list of all games -->
+{% extends "project/base.html" %}
+
+{% block content %}
+
+<div> 
+    {% include 'project/review_filter.html' %}
+</div>
+
+<div class="review-container">
+    {% for review in reviews %}
+        <div class="review-card">
+
+            <a href="{% url 'review_detail' review.pk %}">
+                <div class="review-title">
+                    {{ review.game.title }} — {{ review.rating }}/10
+                </div>
+            </a>
+
+            <div class="review-subtitle">
+                {{ review.reviewer_name }}
+            </div>
+
+            <div class="review-body">
+                {{ review.body|truncatechars:100 }}...
+            </div>
+
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
